@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/modules/register/lawyer_register.dart';
+import 'package:lawyer_app/modules/register/user_register.dart';
 import 'package:lawyer_app/shared/components/components.dart';
 import 'package:lawyer_app/shared/styles/colors.dart';
 import 'package:lawyer_app/shared/widgets/footer.dart';
@@ -49,7 +51,9 @@ class ToggleScreen extends StatelessWidget {
               SizedBox(height: ScreenUtil().setHeight(40)),
               defaultButton(
                   background: mainColor,
-                  function: () {},
+                  function: () {
+                    navigateTo(context, LawyerRegister());
+                  },
                   text: 'محامى',
                   textFontSize: 22.sp,
                   textColor: Colors.white,
@@ -58,7 +62,9 @@ class ToggleScreen extends StatelessWidget {
               SizedBox(height: ScreenUtil().setHeight(20)),
               defaultButton(
                   background: mainColor,
-                  function: () {},
+                  function: () {
+                    navigateTo(context, UserRegister());
+                  },
                   text: 'مستخدم',
                   textFontSize: 22.sp,
                   textColor: Colors.white,
@@ -68,9 +74,7 @@ class ToggleScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar:const Footer(),
+      bottomNavigationBar: const Footer(),
     );
   }
-
-
 }

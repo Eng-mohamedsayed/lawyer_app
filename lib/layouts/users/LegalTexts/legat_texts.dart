@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/layouts/users/chat/chat_screen.dart';
 import 'package:lawyer_app/shared/components/components.dart';
 import 'package:lawyer_app/shared/styles/colors.dart';
 import 'package:lawyer_app/shared/widgets/footer.dart';
@@ -40,6 +41,20 @@ class LegalTextsScreen extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.bold),
         ),
+           actions: [
+          InkWell(
+            onTap: () {
+              navigateTo(context, ChatScreen());
+            },
+            child: const Icon(
+              EvaIcons.messageCircleOutline,
+              size: 32,
+            ),
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+        ],
         backgroundColor: mainColor,
         elevation: 0.0,
       ),

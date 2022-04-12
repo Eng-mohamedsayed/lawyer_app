@@ -38,11 +38,14 @@ Widget defaultTextField({
   TextEditingController? controller,
   IconData? suffixIcon,
   String? hintText,
+  Widget? labelText,
   IconData? prefixIcon,
   Color? iconColor,
+
   required Color borderColor,
   FormFieldValidator? validate,
   TextInputType? type,
+  int? maxLength,
   bool isPassword = false,
   bool read = false,
   void onChange(String value)?,
@@ -58,9 +61,12 @@ Widget defaultTextField({
     onFieldSubmitted: onSubmit,
     validator: validate,
     controller: controller,
+    maxLines: maxLength,
     decoration: InputDecoration(
+      contentPadding: EdgeInsets.all(10),
       fillColor: Colors.grey[200],
       filled: true,
+      label: labelText,
       hintText: hintText,
       hintTextDirection: TextDirection.rtl,
       suffixIcon: IconButton(
@@ -90,3 +96,6 @@ Widget defaultTextField({
     ),
   );
 }
+
+
+

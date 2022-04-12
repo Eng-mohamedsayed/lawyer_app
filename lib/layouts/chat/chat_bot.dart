@@ -1,10 +1,12 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lawyer_app/cubit/cubit.dart';
+import 'package:lawyer_app/models/message_model.dart';
 import 'package:lawyer_app/shared/styles/colors.dart';
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+class ChatBot extends StatelessWidget {
+  const ChatBot({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,13 +67,18 @@ class ChatScreen extends StatelessWidget {
                 Expanded(
                     child: ListView.separated(
                         itemBuilder: (context, index) {
-                          return buildMessage();
+                          var message =
+                              LawyerCubits.get(context).messages[index];
+                          if (LawyerCubits.get(context).model!.userID ==
+                              message.senderID) return buildMyMessage(message);
+
+                          return buildMessage(message);
                         },
                         separatorBuilder: (context, index) => SizedBox(
                               height: 15.h,
                             ),
                         itemCount: 1)),
-                Spacer(),
+                const Spacer(),
                 Container(
                   child: Row(
                     children: [
@@ -92,7 +99,7 @@ class ChatScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
 
@@ -130,7 +137,7 @@ class ChatScreen extends StatelessWidget {
         ));
   }
 
-  Widget buildMessage() {
+  Widget buildMessage(MessageModel messageModel) {
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: Container(
@@ -142,15 +149,12 @@ class ChatScreen extends StatelessWidget {
               topStart: Radius.circular(10),
               topEnd: Radius.circular(10),
             )),
-        child: Text(
-          'مرحبا بك كيف استطيع مساعدتك',
-          style: TextStyle(color: Colors.black, fontSize: 18),
-        ),
+        child: Text('${messageModel.message}'),
       ),
     );
   }
 
-  Widget buildMyMessage() {
+  Widget buildMyMessage(MessageModel messageModel) {
     return Align(
       alignment: AlignmentDirectional.centerEnd,
       child: Container(
@@ -162,10 +166,7 @@ class ChatScreen extends StatelessWidget {
               topStart: Radius.circular(10),
               topEnd: Radius.circular(10),
             )),
-        child: const Text(
-          'السلام عليكم',
-          style: TextStyle(color: Colors.white, fontSize: 18),
-        ),
+        child: Text('${messageModel.message}'),
       ),
     );
   }
